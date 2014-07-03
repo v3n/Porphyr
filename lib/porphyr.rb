@@ -5,7 +5,7 @@ module Porphyr
     def initialize 
       super
       @player = Player.new
+      @player.environment = Room.instance
     end
   end
 end
-
