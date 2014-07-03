@@ -1,22 +1,28 @@
 module Porphyr
   class Player
+    attr_accessor :environment
+
     module Commands
-      def self.look *args
-        puts "Hello"
+      def look *args
+        puts environment.describe.word_wrap
       end
 
-      def self.exit *args
+      def exit *args
         Kernel.exit(true)
       end
 
-      def self.method_missing *args
+      def method_missing *args
         puts "What?"
       end
     end
 
     def respond arg
       cmd = arg.split(" ")
-      Commands.send(cmd[0], cmd)
+      send(cmd[0], cmd)
+    end
+
+    def initialize
+      self.extend Commands
     end
   end
 end
